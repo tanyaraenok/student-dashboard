@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="img/favicon-icon-graduation.png" type="image/png">
+  <script defer src="main.js"></script>
+  <title>Панель управления студентами</title>
+</head>
+
+<body>
+  <div class="container" id="container">
+    <h2 class="panel-title">Панель управления студентами</h2>
+    <form class="data-form" id="data-form" name="Students data entry form" method="post">
+      Заполните все поля формы
+      <fieldset class="data-fieldset row g-3" id="data-fieldset">
+        <div class="col-lg-3 col-sm-6">
+          <label class="form-label student-name-label" id="student-name-label" for="student-name">
+            Имя
+          </label>
+          <input class="form-input form-control student-name hvr-box-shadow-outset " id="student-name" type="text">
+        </div>
+        <div class="col-lg-3 col-sm-6">
+          <label class="form-label student-surname-label" id="student-surname-label" for="student-surname">
+            Фамилия
+          </label>
+          <input class="form-input form-control student-surname" id="student-surname" type="text">
+        </div>
+        <div class="col-lg-6 col-sm-6">
+          <label class="form-label student-middle-name-label" id="student-middle-name-label" for="student-middle-name">
+            Отчество
+          </label>
+          <input class="form-input form-control student-middle-name" id="student-middle-name" type="text">
+        </div>
+        <div class="col-lg-3 col-sm-6">
+          <label class="form-label student-birth-date-label" id="student-birth-date-label" for="student-birth-date">
+            Дата рождения
+          </label>
+          <input class="form-input form-control student-birth-date" id="student-birth-date" type="date"
+            name="student-birth-date">
+        </div>
+        <div class="col-lg-3 col-sm-6">
+          <label class="form-label study-start-year-label" id="study-start-year-label" for="study-start-year">
+            Год начала обучения
+          </label>
+          <input class="form-input form-control study-start-year" id="study-start-year" type="number" step="1"
+            name="study-start-year">
+        </div>
+        <div class="col-lg-6 col-sm-6">
+          <label class="form-label faculty-label" id="faculty-label" for="faculty">
+            Факультет
+          </label>
+          <input class="form-input form-control faculty" id="faculty" type="text">
+        </div>
+        <div class="col-12">
+          <ul class="errors-list hidden" id="errors-list">
+            <li class="error empty-name-error hidden" id="empty-name-error">
+              Поле "Имя" не должно быть пустым!
+            </li>
+            <li class="error empty-surname-error hidden" id="empty-surname-error">
+              Поле "Фамилия" не должно быть пустым!
+            </li>
+            <li class="error empty-middlename-error hidden" id="empty-middlename-error">
+              Поле "Отчество" не должно быть пустым!
+            </li>
+            <li class="error empty-bday-error hidden" id="empty-bday-error">
+              Поле "Дата рождения" не должно быть пустым!
+            </li>
+            <li class="error bday-error hidden" id="bday-error">
+              Дата рождения должна находиться в диапазоне от 01.01.1900 до текущей даты!
+            </li>
+            <li class="error empty-study-year-error hidden" id="empty-study-year-error">
+              Поле "Год начала обучения" не должно быть пустым!
+            </li>
+            <li class="error study-year-error hidden" id="study-year-error">
+              Год начала обучения должен находиться в диапазоне от 2000-го до текущего года!
+            </li>
+            <li class="error empty-faculty-error hidden" id="empty-faculty-error">
+              Поле "Факультет" не должно быть пустым!
+            </li>
+          </ul>
+          <input class="submit-button btn btn-primary" id="submit-button" type="submit" value="Добавить студента">
+        </div>
+      </fieldset>
+    </form>
+    <h2 class="table-caption">Список студентов</h2>
+    
+    <div class="table-responsive-md col-lg-12">
+      <table class="table align-middle table-light table-hover table-striped table-bordered">
+        <tr class="thead-filter">
+          <th>
+            <input class="find-fullName" id="find-full-name" type="text" placeholder="Найти ФИО">
+          </th>
+          <th>
+            <input class="find-faculty" id="find-faculty" type="text" placeholder="Найти факультет">
+          </th>
+          <th>
+            <input class="find-start-study-year" id="find-start-study-year" type="number"
+              placeholder="Найти год начала обучения">
+          </th>
+          <th>
+            <input class="find-last-study-year" id="find-last-study-year" type="number"
+              placeholder="Найти год окончания обучения">
+          </th>
+        </tr>
+      </table>
+    </div>
+    <div class="table-responsive-md col-lg-12">
+      <table class="table align-middle table-light table-hover table-striped table-bordered students-table"
+        id="students-table">
+        <thead class="thead">
+          <tr class="thead-tr">
+            <th class="col-3 thead-fullname" id="thead-fullname">ФИО
+              <button class="sort-button-fullname" id="sort-button-fullname"
+                aria-label="Отсортировать список студентов по ФИО">
+
+              </button>
+            </th>
+            <th class="col-2 thead-faculty" id="thead-faculty">Факультет
+              <button class="sort-button-faculty" id="sort-button-faculty"
+                aria-label="Отсортировать список студентов по факультету">
+
+              </button>
+            </th>
+            <th class="col-3 thead-bday" id="thead-bday">Дата рождения (возраст)
+              <button class="sort-button-bday" id="sort-button-bday"
+                aria-label="Отсортировать список студентов по дате рождения">
+
+              </button>
+            </th>
+            <th class="col-3 thead-study-years" id="thead-study-years">Годы обучения (курс)
+              <button class="sort-button-study" id="sort-button-study"
+                aria-label="Отсортировать список студентов по году начала обучения">
+
+              </button>
+            </th>
+            <th class="col thead-delete-student">
+              Удалить студента
+            </th>
+          </tr>
+        </thead>
+        <tbody class="students-list" id="students-list">
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+</body>
+
+</html>
